@@ -1,0 +1,21 @@
+# Terraform
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+
+# Variables
+*.tfvars
+*.tfvars.json
+
+# CLI config
+.terraformrc
+terraform.rc
+
+# OS / Editor
+.DS_Store
+.vscode/
+.idea/
+
+# lambda compactado
+*.zip

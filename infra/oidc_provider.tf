@@ -81,5 +81,5 @@ resource "aws_iam_role_policy_attachment" "oidc_attachment" {
 
 #tfstate para deploy automatico
 resource "aws_s3_bucket" "terraform_state" {
-  bucket = "event-driven-terraform-state-gabriel-linhares"
+  bucket = "saas-project-terraform-state-gabriel-linhares"
 }
