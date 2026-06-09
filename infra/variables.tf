@@ -8,6 +8,6 @@ variable "github_allowed_repo_and_branch" {
   description = "O repositório GitHub que tem permissão para assumir a função OIDC."
   type        = string
 
-  # caso queira testar em um fork altere aqui
+  # caso queira testar em um fork altere aqui 
   default = "repo:GabrielLinharesRamos/aws-serverless-expense-tracker-SaaS-:ref:refs/heads/main"
 }
