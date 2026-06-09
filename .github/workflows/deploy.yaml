@@ -1,0 +1,42 @@
+on:
+  push:
+    branches:
+      - main
+
+    paths-ignore:
+      - README.md
+      - 'diagrams/**'
+
+jobs:
+  terraform-validation:
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Obrigatório para o OIDC funcionar
+      contents: read  # Permite que o checkout leia o código do repositório
+
+
+    steps:
+      - name: deploying machine
+        uses: actions/checkout@v4
+
+      - name: Configuring AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }} # sendo passado dinamicamente pelo Github Secrets
+          aws-region: ${{ vars.AWS_REGION }} # sendo passado dinamicamente pelo Github variables
+
+      - name: Configuring Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Testing AWS connection
+        run: aws sts get-caller-identity
+
+      - name: deploying AWS
+        working-directory: ./infra
+        run: |
+          terraform init
+          terraform fmt -check
+          terraform validate
+          terraform plan
+          terraform apply -auto-approve
