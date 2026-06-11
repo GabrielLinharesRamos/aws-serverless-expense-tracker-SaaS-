@@ -12,7 +12,7 @@ def list_expense(event):
 
     try:
 
-        expenses_list = list_by_user("USER#ANONYMOUS")
+        expenses_list = list_by_user("ANONYMOUS")
         
         return {
             'statusCode': 200,
