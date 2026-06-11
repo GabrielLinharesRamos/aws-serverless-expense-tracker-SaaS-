@@ -15,6 +15,18 @@ def exclude_expense(event):
         expense_id = event["pathParameters"]["expense_id"]
 
         exclude_expense_repository("ANONYMOUS", expense_id)
+
+        logger.info(
+            json.dumps(
+                {
+                    "message": "expense excluded",
+                    "request_id": event["requestContext"]["requestId"],
+                    "expense_id": expense_id,
+                    "event_type": "exclude_expense",
+                    "status": "success"
+                }
+            )
+        )
         
         return {
             'statusCode': 200,
@@ -27,6 +39,7 @@ def exclude_expense(event):
                 {
                     "message": "Failed to exclude expenses",
                     "request_id": event["requestContext"]["requestId"],
+                    "expense_id": expense_id,
                     "event_type": 'exclude_expense',
                     "status": "failed",
                     "error": str(e)

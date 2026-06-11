@@ -1,5 +1,6 @@
 import boto3
 import os
+from datetime import datetime
 
 from boto3.dynamodb.conditions import Key
 
@@ -22,6 +23,25 @@ def exclude_expense_repository(user_id, expense_id):
         Key={
             "PK": f"USER#{user_id}",
             "SK": f"EXPENSE#{expense_id}"
+        },
+        ConditionExpression="attribute_exists(PK)"
+    )
+
+def update_expense_repository(user_id,expense_id,amount,description):
+    table.update_item(
+        Key={
+            "PK": f"USER#{user_id}",
+            "SK": f"EXPENSE#{expense_id}"
+        },
+        UpdateExpression="""
+            SET amount = :amount,
+                description = :description,
+                updated_at = :updated_at
+        """,
+        ExpressionAttributeValues={
+            ':amount': amount,
+            ':description': description,
+            ':updated_at': datetime.utcnow().isoformat()
         },
         ConditionExpression="attribute_exists(PK)"
     )

@@ -30,7 +30,7 @@ O projeto será desenvolvido de forma incremental:
 - Fase 3 → Evolução do Domínio Financeiro
 - Fase 4 → Segurança e Maturidade de Produção
 - Fase 5 → Observabilidade
-- Fase 7 → Refinamento e Nível Portfólio
+- Fase 6 → Refinamento e Nível Portfólio
 
 # Fase 0 - CI/CD
 
