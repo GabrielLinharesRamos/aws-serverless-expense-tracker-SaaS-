@@ -61,3 +61,17 @@ Também foi desenvolvida a primeira função Lambda responsável pelo cadastro d
 Além das funcionalidades, foi definida e implementada a estrutura organizacional do projeto, separando responsabilidades entre camadas de entrada (handlers), regras de negócio (services), acesso a dados (repositories) e componentes compartilhados. Essa organização foi planejada desde o início para suportar o crescimento da aplicação e facilitar a manutenção conforme novas funcionalidades forem adicionadas.
 
 Com essas entregas, o projeto passa a possuir sua primeira operação de negócio implementada e estabelece a base arquitetural que será utilizada nas próximas etapas de desenvolvimento.
+
+Dia 3:
+
+Durante o desenvolvimento de hoje, foi concluída a primeira versão funcional da camada de aplicação responsável pelo gerenciamento de despesas.
+
+Foram implementados os endpoints de criação, listagem, atualização e exclusão de despesas, consolidando o CRUD principal da aplicação. Cada operação foi estruturada seguindo uma separação de responsabilidades entre handlers, services, repositories e utilitários compartilhados, preparando a base do projeto para futuras evoluções sem comprometer a organização do código.
+
+Além disso, foram implementados logs estruturados em formato JSON para operações críticas, facilitando futuras atividades de monitoramento e troubleshooting através do CloudWatch.
+
+Com essa entrega, a aplicação passa a possuir uma base funcional completa para gerenciamento de despesas, restando a integração final dos recursos da AWS para validação ponta a ponta da arquitetura serverless.
+
+# Fase 2 - Autenticação e Multi-Tenancy
+
+---
