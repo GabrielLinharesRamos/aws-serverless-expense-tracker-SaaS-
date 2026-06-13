@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
       values = [
         var.github_allowed_repo_and_branch
       ]
-    }
+    } 
 
     actions = ["sts:AssumeRoleWithWebIdentity"] #diferente de assumeRole por que o mecanismo de autenticação para federação é diferente
   }
