@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "oidc_permissions_policy_json" {
       "lambda:*",
       "sqs:*",
       "dynamodb:*",
-      "cloudwatch:*",
+      "cloudwatch:*", 
       "logs:*",
       "apigateway:*",
       "iam:*",
