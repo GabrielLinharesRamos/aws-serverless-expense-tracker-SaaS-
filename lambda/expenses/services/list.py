@@ -1,7 +1,7 @@
 import json
 import uuid
-from datetime import datetime
 import logging
+from decimal import Decimal
 
 from expenses_repository import list_by_user
 
@@ -16,7 +16,7 @@ def list_expense(event):
         
         return {
             'statusCode': 200,
-            'body': json.dumps(expenses_list)
+            'body': expenses_list
         }
     
     except Exception as e:
@@ -35,6 +35,6 @@ def list_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error 3"
+                "message": str(e)
             })
         }
