@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 import logging
 
-from shared.repositories.expense_repository import exclude_expense_repository
+from expenses_repository import exclude_expense_repository
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -50,6 +50,6 @@ def exclude_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error"
+                "message": "Internal server error 2"
             })
         }

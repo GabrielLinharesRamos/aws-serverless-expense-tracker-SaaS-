@@ -3,8 +3,8 @@
 # Zipa o codigo da função create expense
 data "archive_file" "package_create_expense" {
   type        = "zip"
-  source_dir  = "${path.module}/../lambda/expenses/create"
-  output_path = "${path.module}/../lambda/expenses/create/function.zip"
+  source_dir  = "${path.module}/../lambda/expenses"
+  output_path = "${path.module}/../lambda/expenses/function.zip"
 }
 
 data "aws_iam_policy_document" "assume_role_expenses" {
@@ -39,6 +39,10 @@ resource "aws_lambda_function" "saas_project_create_expense" {
   source_code_hash = data.archive_file.package_create_expense.output_base64sha256
 
   runtime = "python3.13"
+
+  layers = [
+    aws_lambda_layer_version.shared_layer.arn
+  ]
   
   environment {
     variables = {
@@ -99,4 +103,24 @@ resource "aws_iam_policy" "expense_permissions_policy" {
 resource "aws_iam_role_policy_attachment" "lambda_expense_attachment" {
   role       = aws_iam_role.iam_lambda_expense.name
   policy_arn = aws_iam_policy.expense_permissions_policy.arn
+}
+
+# layer da função
+
+data "archive_file" "shared_layer_zip" {
+  type = "zip"
+
+  source_dir  = "${path.module}/../lambda/layers"
+  output_path = "${path.module}/../lambda/layers/shared-layer.zip"
+}
+
+resource "aws_lambda_layer_version" "shared_layer" {
+  filename   = data.archive_file.shared_layer_zip.output_path
+  layer_name = "${var.project_name}-shared-layer"
+
+  source_code_hash = data.archive_file.shared_layer_zip.output_base64sha256
+
+  compatible_runtimes = [
+    "python3.13"
+  ]
 }

@@ -3,49 +3,54 @@ import uuid
 from datetime import datetime
 import logging
 
-from shared.repositories.expense_repository import update_expense_repository
-from shared.validators.request_validator import (
-    validate_fields,
-    validate_amount
-)
+from expenses_repository import save
+from shared.validators.allowed_fields_validator import validate_fields
+from shared.validators.amount_validator import validate_amount
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-def update_expense(event):
+def create_expense(event):
+
+    expense_id = None
 
     try:
 
-        expense_id = event["pathParameters"]["expense_id"]
-
+        expense_id = str(uuid.uuid4())
         body = json.loads(event["body"])
-
-        amount = body["amount"]
-        description = body["description"]
 
         allowed_fields = {"amount", "description"}
 
         validate_fields(body,allowed_fields)
 
-        amount = validate_amount(amount)
+        amount = validate_amount(body["amount"])
 
-        update_expense_repository("ANONYMOUS", expense_id, amount, description)
+        expense = {
+            'PK':"USER#ANONYMOUS",
+            'SK':f"EXPENSE#{expense_id}",
+            'entity_type': "EXPENSE",
+            'amount': amount,
+            'description': body["description"],
+            'created_at': datetime.utcnow().isoformat()
+        }
+
+        save(expense)
 
         logger.info(
             json.dumps(
                 {
-                    "message": "expense updated",
+                    "message": "expense created",
                     "request_id": event["requestContext"]["requestId"],
                     "expense_id": expense_id,
-                    "event_type": "update_expense",
+                    "event_type": "create_expense",
                     "status": "success"
                 }
             )
         )
         
         return {
-            'statusCode': 200,
-            'body': json.dumps('expense updated')
+            'statusCode': 201,
+            'body': json.dumps('expense Created')
         }
 
     except ValueError as e:
@@ -70,13 +75,13 @@ def update_expense(event):
         }
     
     except Exception as e:
-        logger.exception(
+        logger.error(
             json.dumps(
                 {
-                    "message": "Failed to update the expense",
+                    "message": "Failed creating expense",
                     "request_id": event["requestContext"]["requestId"],
                     "expense_id": expense_id,
-                    "event_type": 'update_expense',
+                    "event_type": 'create_expense',
                     "status": "failed",
                     "error": str(e)
                 }
@@ -86,6 +91,6 @@ def update_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error"
+                "message": str(e)
             })
         }

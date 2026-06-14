@@ -3,7 +3,7 @@ import uuid
 from datetime import datetime
 import logging
 
-from shared.repositories.expense_repository import list_by_user
+from expenses_repository import list_by_user
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -35,6 +35,6 @@ def list_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error"
+                "message": "Internal server error 3"
             })
         }
