@@ -80,7 +80,7 @@ Com essa entrega, a aplicação passa a possuir uma base funcional completa para
 - Essa mudança reduziu a quantidade de recursos provisionados na AWS, simplificou o gerenciamento da infraestrutura e tornou a estrutura do projeto mais organizada e escalável para futuras funcionalidades.
 - Também concluí a configuração e validação das rotas HTTP do API Gateway para os endpoints de despesas, garantindo a integração correta com a nova arquitetura baseada em domínio.
 
-# Fase 2 - Autenticação e Multi-Tenancy 
+# Fase 2 - Autenticação e Multi-Tenancy
 
 ---
 
