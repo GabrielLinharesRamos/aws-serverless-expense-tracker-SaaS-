@@ -24,12 +24,20 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_post_expense" {
   api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
   route_key = "POST /expenses"
 
+  authorization_type = "JWT"
+
+  authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
+
   target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
 }
 
 resource "aws_apigatewayv2_route" "saas_project_api_routes_get_expense" {
   api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
   route_key = "GET /expenses"
+
+  authorization_type = "JWT"
+
+  authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
   target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
 }
@@ -38,12 +46,20 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_delete_expense" {
   api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
   route_key = "DELETE /expenses/{expense_id}"
 
+  authorization_type = "JWT"
+
+  authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
+
   target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
 }
 
 resource "aws_apigatewayv2_route" "saas_project_api_routes_put_expense" {
   api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
   route_key = "PUT /expenses/{expense_id}"
+
+  authorization_type = "JWT"
+
+  authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
   target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
 }

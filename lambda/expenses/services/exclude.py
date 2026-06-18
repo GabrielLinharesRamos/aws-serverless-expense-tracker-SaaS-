@@ -50,6 +50,6 @@ def exclude_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error 2"
+                "message": str(e)
             })
         }

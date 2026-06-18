@@ -16,7 +16,7 @@ def list_expense(event):
         
         return {
             'statusCode': 200,
-            'body': expenses_list
+            'body': json.dumps(expenses_list,default=lambda x: float(x) if isinstance(x, Decimal) else x)
         }
     
     except Exception as e:
