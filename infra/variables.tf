@@ -8,7 +8,7 @@ variable "region" {
   description = "nome da região do projeto"
   type        = string
   default     = "sa-east-1"
-}
+} 
 
 variable "github_allowed_repo_and_branch" {
   description = "O repositório GitHub que tem permissão para assumir a função OIDC."
