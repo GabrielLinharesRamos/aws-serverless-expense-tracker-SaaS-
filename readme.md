@@ -99,7 +99,3 @@ Por fim, todas as rotas do domínio de despesas (Expenses) foram configuradas pa
 ### Dia 6:
 
 Finalizei a fase 2 do projeto, implementando o isolamento de dados entre usuários. Ajustei as funções principais do sistema — criação, listagem, atualização e exclusão de despesas — para que cada operação considere o identificador do usuário obtido a partir do token JWT. Com isso, cada usuário passa a acessar apenas os próprios dados, sem possibilidade de interferência nos registros de outros usuários. Essa mudança consolidou a base de autenticação e autorização do sistema, garantindo o isolamento no nível de usuário e fortalecendo a segurança da aplicação.
-
-# Fase 3 - Evolução do Domínio Financeiro
-
----
