@@ -103,5 +103,3 @@ Finalizei a fase 2 do projeto, implementando o isolamento de dados entre usuári
 # Fase 3 - Evolução do Domínio Financeiro
 
 ---
-
-### Dia 7:
