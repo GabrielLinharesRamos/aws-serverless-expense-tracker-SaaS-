@@ -27,7 +27,9 @@ def update_expense(event):
 
         amount = validate_amount(amount)
 
-        update_expense_repository("ANONYMOUS", expense_id, amount, description)
+        user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
+
+        update_expense_repository(user_id, expense_id, amount, description)
 
         logger.info(
             json.dumps(

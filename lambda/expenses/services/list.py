@@ -12,11 +12,13 @@ def list_expense(event):
 
     try:
 
-        expenses_list = list_by_user("ANONYMOUS")
+        user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
+        expenses_list = list_by_user(user_id)
+        
         
         return {
             'statusCode': 200,
-            'body': json.dumps(expenses_list,default=lambda x: float(x) if isinstance(x, Decimal) else x)
+            'body': json.dumps(expenses_list,default=lambda x: float(x) if isinstance(x, Decimal) else x),
         }
     
     except Exception as e:
