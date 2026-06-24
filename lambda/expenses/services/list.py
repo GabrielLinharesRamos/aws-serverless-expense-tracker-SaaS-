@@ -3,7 +3,7 @@ import uuid
 import logging
 from decimal import Decimal
 
-from expenses_repository import list_by_user
+from expenses_repository import list_by_family
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -12,8 +12,9 @@ def list_expense(event):
 
     try:
 
-        user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
-        expenses_list = list_by_user(user_id)
+        family_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["custom:family_id"]
+
+        expenses_list = list_by_family(family_id)
         
         
         return {
