@@ -14,9 +14,9 @@ def exclude_expense(event):
 
         expense_id = event["pathParameters"]["expense_id"]
 
-        user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
+        family_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["custom:family_id"]
 
-        exclude_expense_repository(user_id, expense_id)
+        exclude_expense_repository(family_id, expense_id)
 
         logger.info(
             json.dumps(

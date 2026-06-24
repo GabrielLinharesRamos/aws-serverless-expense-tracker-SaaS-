@@ -24,7 +24,7 @@ def exclude_expense_repository(family_id, expense_id):
             "PK": f"FAMILY#{family_id}",
             "SK": f"EXPENSE#{expense_id}"
         },
-        ConditionExpression="attribute_exists(PK)"
+        ConditionExpression="attribute_exists(PK) AND attribute_exists(SK)"
     )
 
 def update_expense_repository(family_id,expense_id,amount,description):
