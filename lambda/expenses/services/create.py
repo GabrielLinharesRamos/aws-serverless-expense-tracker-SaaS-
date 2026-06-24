@@ -26,10 +26,13 @@ def create_expense(event):
         amount = validate_amount(body["amount"])
 
         user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
+        family_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["custom:family_id"]
 
         expense = {
-            'PK':f"USER#{user_id}",
+            'PK':f"FAMILY#{family_id}",
             'SK':f"EXPENSE#{expense_id}",
+            'GSI1PK':f"USER#{user_id}",
+            "GSI1SK": f"EXPENSE#{expense_id}",
             'entity_type': "EXPENSE",
             'amount': amount,
             'description': body["description"],

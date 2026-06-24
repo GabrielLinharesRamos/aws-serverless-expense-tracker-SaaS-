@@ -13,24 +13,24 @@ table = dynamodb.Table(
 def save(item):
     table.put_item(Item=item)
 
-def list_by_user(user_id):
-    response = table.query(KeyConditionExpression=Key('PK').eq(f"USER#{user_id}"))
+def list_by_family(family_id):
+    response = table.query(KeyConditionExpression=Key('PK').eq(f"FAMILY#{family_id}"))
 
     return response["Items"]
 
-def exclude_expense_repository(user_id, expense_id):
+def exclude_expense_repository(family_id, expense_id):
     table.delete_item(
         Key={
-            "PK": f"USER#{user_id}",
+            "PK": f"FAMILY#{family_id}",
             "SK": f"EXPENSE#{expense_id}"
         },
         ConditionExpression="attribute_exists(PK)"
     )
 
-def update_expense_repository(user_id,expense_id,amount,description):
+def update_expense_repository(family_id,expense_id,amount,description):
     table.update_item(
         Key={
-            "PK": f"USER#{user_id}",
+            "PK": f"FAMILY#{family_id}",
             "SK": f"EXPENSE#{expense_id}"
         },
         UpdateExpression="""

@@ -8,6 +8,17 @@ resource "aws_cognito_user_pool" "saas_project_user_pool" {
   password_policy {
     minimum_length = 8
 }
+  schema {
+    attribute_data_type = "String"
+    name = "family_id"
+    required = false
+    mutable = true
+    
+    string_attribute_constraints {
+      min_length = 1
+      max_length = 64
+    }
+  }
 }
 
 resource "aws_cognito_user_pool_client" "cognito_client" {

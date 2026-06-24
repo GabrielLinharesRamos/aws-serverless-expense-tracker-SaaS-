@@ -99,3 +99,15 @@ Por fim, todas as rotas do domínio de despesas (Expenses) foram configuradas pa
 ### Dia 6:
 
 Finalizei a fase 2 do projeto, implementando o isolamento de dados entre usuários. Ajustei as funções principais do sistema — criação, listagem, atualização e exclusão de despesas — para que cada operação considere o identificador do usuário obtido a partir do token JWT. Com isso, cada usuário passa a acessar apenas os próprios dados, sem possibilidade de interferência nos registros de outros usuários. Essa mudança consolidou a base de autenticação e autorização do sistema, garantindo o isolamento no nível de usuário e fortalecendo a segurança da aplicação.
+
+# Fase 3 - Evolução do Domínio Financeiro
+
+---
+
+### Dia 7:
+
+Refleti sobre os requisitos do projeto e decidi evoluir o sistema para suportar uma nova funcionalidade de tenancy. O sistema deixa de ser uma aplicação de gestão financeira pessoal e passa a ser uma plataforma de gestão financeira familiar, na qual cada família possui acesso isolado aos seus próprios dados, sem possibilidade de visualização por outras famílias.
+
+Nesse novo modelo, os dados de cada família são compostos pelo conjunto de informações fornecidas pelos seus integrantes, onde cada usuário possui seu próprio login e senha. Dentro da mesma família, os usuários podem visualizar os dados dos demais membros, mas não podem criar ou modificar informações diretamente em nome de outro usuário.
+
+A maior parte do tempo foi dedicada à análise das mudanças necessárias na arquitetura e à forma como essa nova modelagem será implementada. Esse estudo é fundamental para garantir uma evolução consistente do sistema e evitar retrabalho em etapas futuras, especialmente na modelagem de dados e definição do modelo de tenancy.
