@@ -110,4 +110,4 @@ Refleti sobre os requisitos do projeto e decidi evoluir o sistema para suportar 
 
 Nesse novo modelo, os dados de cada família são compostos pelo conjunto de informações fornecidas pelos seus integrantes, onde cada usuário possui seu próprio login e senha. Dentro da mesma família, os usuários podem visualizar os dados dos demais membros, mas não podem criar ou modificar informações diretamente em nome de outro usuário.
 
-A maior parte do tempo foi dedicada à análise das mudanças necessárias na arquitetura e à forma como essa nova modelagem será implementada. Esse estudo é fundamental para garantir uma evolução consistente do sistema e evitar retrabalho em etapas futuras, especialmente na modelagem de dados e definição do modelo de tenancy.
+A maior parte do tempo foi dedicada à análise das mudanças necessárias na arquitetura e à forma como essa nova modelagem será implementada. Esse estudo é fundamental para garantir uma evolução consistente do sistema e evitar retrabalho em etapas futuras, especialmente na modelagem de dados e definição do modelo de tenancy. 
