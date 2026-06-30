@@ -1,4 +1,3 @@
-#função create expense
 
 # Zipa o codigo da função create expense
 data "archive_file" "package_create_expense" {

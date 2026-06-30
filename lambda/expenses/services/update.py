@@ -12,6 +12,8 @@ logger.setLevel(logging.INFO)
 
 def update_expense(event):
 
+    expense_id = None
+
     try:
 
         expense_id = event["pathParameters"]["expense_id"]
@@ -27,9 +29,9 @@ def update_expense(event):
 
         amount = validate_amount(amount)
 
-        user_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["sub"]
+        family_id = event["requestContext"]["authorizer"]["jwt"]["claims"]["custom:family_id"]
 
-        update_expense_repository(user_id, expense_id, amount, description)
+        update_expense_repository(family_id, expense_id, amount, description)
 
         logger.info(
             json.dumps(
@@ -86,6 +88,6 @@ def update_expense(event):
         return {
             "statusCode": 500,
             "body": json.dumps({
-                "message": "Internal server error 4"
+                "message": "Internal server error"
             })
         }

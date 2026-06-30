@@ -10,6 +10,8 @@ logger.setLevel(logging.INFO)
 
 def exclude_expense(event):
 
+    expense_id = None
+
     try:
 
         expense_id = event["pathParameters"]["expense_id"]

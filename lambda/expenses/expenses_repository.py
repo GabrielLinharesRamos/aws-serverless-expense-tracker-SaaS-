@@ -43,5 +43,5 @@ def update_expense_repository(family_id,expense_id,amount,description):
             ':description': description,
             ':updated_at': datetime.utcnow().isoformat()
         },
-        ConditionExpression="attribute_exists(PK)"
+        ConditionExpression="attribute_exists(PK) AND attribute_exists(SK)"
     )
