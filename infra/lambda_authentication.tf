@@ -42,6 +42,12 @@ resource "aws_lambda_function" "saas_project_auth" {
   layers = [
     aws_lambda_layer_version.shared_layer.arn
   ]
+
+  environment {
+    variables = {
+      COGNITO_CLIENT_ID = aws_cognito_user_pool_client.cognito_client.id
+    }
+  }
   
 }
 
