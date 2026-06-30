@@ -2,8 +2,8 @@
 # Zipa o codigo da função auth
 data "archive_file" "package_auth" {
   type        = "zip"
-  source_dir  = "${path.module}/../lambda/auth"
-  output_path = "${path.module}/../lambda/auth/function.zip"
+  source_dir  = "${path.module}/../lambda/authentication"
+  output_path = "${path.module}/../lambda/authentication/function.zip"
 }
 
 data "aws_iam_policy_document" "assume_role_auth" {
@@ -97,24 +97,4 @@ resource "aws_iam_policy" "auth_permissions_policy" {
 resource "aws_iam_role_policy_attachment" "lambda_auth_attachment" {
   role       = aws_iam_role.iam_lambda_auth.name
   policy_arn = aws_iam_policy.auth_permissions_policy.arn
-}
-
-# layer da função
-
-data "archive_file" "shared_layer_zip" {
-  type = "zip"
-
-  source_dir  = "${path.module}/../lambda/layers"
-  output_path = "${path.module}/../lambda/layers/shared-layer.zip"
-}
-
-resource "aws_lambda_layer_version" "shared_layer" {
-  filename   = data.archive_file.shared_layer_zip.output_path
-  layer_name = "${var.project_name}-shared-layer"
-
-  source_code_hash = data.archive_file.shared_layer_zip.output_base64sha256
-
-  compatible_runtimes = [
-    "python3.13"
-  ]
 }
