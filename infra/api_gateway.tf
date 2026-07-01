@@ -9,8 +9,8 @@ resource "aws_apigatewayv2_api" "saas_project_api_gateway" {
   }
 }
 
-# integração do API Gateway com o Lambda
-resource "aws_apigatewayv2_integration" "saas_project_api_integration" {
+# integração do API Gateway com o Lambda expenses
+resource "aws_apigatewayv2_integration" "saas_project_api_integration_expenses" {
   api_id           = aws_apigatewayv2_api.saas_project_api_gateway.id
   integration_type = "AWS_PROXY"
 
@@ -19,7 +19,7 @@ resource "aws_apigatewayv2_integration" "saas_project_api_integration" {
   integration_uri        = aws_lambda_function.saas_project_create_expense.invoke_arn
 }
 
-# definindo as rotas do api gateway
+# definindo as rotas de expenses do api gateway
 resource "aws_apigatewayv2_route" "saas_project_api_routes_post_expense" {
   api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
   route_key = "POST /expenses"
@@ -28,7 +28,7 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_post_expense" {
 
   authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
-  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_expenses.id}"
 }
 
 resource "aws_apigatewayv2_route" "saas_project_api_routes_get_expense" {
@@ -39,7 +39,7 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_get_expense" {
 
   authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
-  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_expenses.id}"
 }
 
 resource "aws_apigatewayv2_route" "saas_project_api_routes_delete_expense" {
@@ -50,7 +50,7 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_delete_expense" {
 
   authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
-  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_expenses.id}"
 }
 
 resource "aws_apigatewayv2_route" "saas_project_api_routes_put_expense" {
@@ -61,7 +61,24 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_put_expense" {
 
   authorizer_id = aws_apigatewayv2_authorizer.cognito_jwt_authorizer.id
 
-  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration.id}"
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_expenses.id}"
+}
+
+# integração do API Gateway com o Lambda auth
+resource "aws_apigatewayv2_integration" "saas_project_api_integration_auth" {
+  api_id           = aws_apigatewayv2_api.saas_project_api_gateway.id
+  integration_type = "AWS_PROXY"
+
+  payload_format_version = "2.0"
+  integration_method     = "POST"
+  integration_uri        = aws_lambda_function.saas_project_auth.invoke_arn
+}
+
+resource "aws_apigatewayv2_route" "saas_project_api_routes_post_signup" { 
+  api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
+  route_key = "POST /auth/signup" 
+
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_auth.id}"
 }
 
 # Criação do stage

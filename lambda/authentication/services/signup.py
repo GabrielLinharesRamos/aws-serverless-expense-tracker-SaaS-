@@ -36,7 +36,10 @@ def signup(event):
 
         return {
             'statusCode': 201,
-            'body': json.dumps('user Created')
+            "body": json.dumps({
+                "message": 'user Created',
+                "tokens": response["AuthenticationResult"]
+            })
         }
 
     except Exception as e:
