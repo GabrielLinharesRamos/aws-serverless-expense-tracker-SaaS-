@@ -111,3 +111,19 @@ Refleti sobre os requisitos do projeto e decidi evoluir o sistema para suportar 
 Nesse novo modelo, os dados de cada família são compostos pelo conjunto de informações fornecidas pelos seus integrantes, onde cada usuário possui seu próprio login e senha. Dentro da mesma família, os usuários podem visualizar os dados dos demais membros, mas não podem criar ou modificar informações diretamente em nome de outro usuário.
 
 A maior parte do tempo foi dedicada à análise das mudanças necessárias na arquitetura e à forma como essa nova modelagem será implementada. Esse estudo é fundamental para garantir uma evolução consistente do sistema e evitar retrabalho em etapas futuras, especialmente na modelagem de dados e definição do modelo de tenancy.
+
+### Dia 8:
+
+Implementei um novo domínio responsável pela autenticação do sistema, contendo duas novas rotas principais: **signup** e **login**, responsáveis pela criação de usuários e autenticação via Cognito utilizando o modelo `USER_PASSWORD_AUTH`  sem suporte ao `REFRESH_TOKEN`. Essa decisão foi intencional para manter o sistema **stateless e simplificado na primeira versão**, reduzindo complexidade no gerenciamento de sessões e validação de tokens. Alguns bugs relacionados a autenticação e ao roteamento também foram consertados
+
+Além disso, devido à evolução do escopo do projeto para um modelo de **multi-tenancy baseado em famílias**, foi necessário revisar a modelagem do banco de dados no DynamoDB. A estrutura passou a utilizar `family_id` como chave primária (PK), garantindo o isolamento dos dados por tenant, enquanto o identificador da despesa (`expense_id`) passou a ser utilizado como chave de ordenação (SK).
+
+Também foi introduzido um **GSI (Global Secondary Index)** para suportar consultas baseadas em usuário, permitindo que cada integrante visualize tanto seus próprios gastos quanto os gastos agregados da sua família. Essa abordagem garante flexibilidade na forma de consulta sem comprometer o isolamento entre famílias.
+
+algumas outras mudanças foram:
+
+- `family_id` passou a ser carregado a partir dos **claims do JWT do Cognito**
+- Criação de atributo customizado `custom:family_id`
+- Ajuste nas rotas e serviços para refletir o novo modelo:
+    - `/expenses` → dados da família
+    - `/expenses/my` (planejado) → visão individual do usuário
