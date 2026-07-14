@@ -2,7 +2,7 @@
 
 data "aws_iam_policy_document" "github_actions_assume_role" {
   statement {
-    effect = "Allow"
+    effect = "Allow" 
 
     principals {
       type        = "Federated" #serviço externo
