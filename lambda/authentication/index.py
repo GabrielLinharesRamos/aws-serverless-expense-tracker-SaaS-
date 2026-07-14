@@ -1,4 +1,4 @@
-# from services.login import login
+from services.login import login
 from services.signup import signup
 
 def lambda_handler(event, context):
