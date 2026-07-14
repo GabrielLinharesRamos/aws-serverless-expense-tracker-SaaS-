@@ -38,7 +38,6 @@ def signup(event):
             'statusCode': 201,
             "body": json.dumps({
                 "message": 'user Created',
-                "tokens": response["AuthenticationResult"]
             })
         }
 
