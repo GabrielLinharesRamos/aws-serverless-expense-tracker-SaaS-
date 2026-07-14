@@ -42,7 +42,7 @@ resource "aws_lambda_function" "saas_project_create_expense" {
   layers = [
     aws_lambda_layer_version.shared_layer.arn
   ]
-  
+
   environment {
     variables = {
       EXPENSES_TABLE = aws_dynamodb_table.saas_project_expenses.name
@@ -56,8 +56,8 @@ resource "aws_lambda_function" "saas_project_create_expense" {
 }
 
 resource "aws_lambda_permission" "api_gateway_create_expense" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
+  statement_id = "AllowExecutionFromAPIGateway"
+  action       = "lambda:InvokeFunction"
 
   function_name = aws_lambda_function.saas_project_create_expense.function_name
 

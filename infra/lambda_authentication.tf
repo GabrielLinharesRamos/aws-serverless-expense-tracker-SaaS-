@@ -48,12 +48,12 @@ resource "aws_lambda_function" "saas_project_auth" {
       COGNITO_CLIENT_ID = aws_cognito_user_pool_client.cognito_client.id
     }
   }
-  
+
 }
 
 resource "aws_lambda_permission" "api_gateway_auth" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
+  statement_id = "AllowExecutionFromAPIGateway"
+  action       = "lambda:InvokeFunction"
 
   function_name = aws_lambda_function.saas_project_auth.function_name
 

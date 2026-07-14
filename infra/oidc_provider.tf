@@ -2,7 +2,7 @@
 
 data "aws_iam_policy_document" "github_actions_assume_role" {
   statement {
-    effect = "Allow" 
+    effect = "Allow"
 
     principals {
       type        = "Federated" #serviço externo
@@ -25,7 +25,7 @@ data "aws_iam_policy_document" "github_actions_assume_role" {
       values = [
         var.github_allowed_repo_and_branch
       ]
-    } 
+    }
 
     actions = ["sts:AssumeRoleWithWebIdentity"] #diferente de assumeRole por que o mecanismo de autenticação para federação é diferente
   }
@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "oidc_permissions_policy_json" {
       "lambda:*",
       "sqs:*",
       "dynamodb:*",
-      "cloudwatch:*", 
+      "cloudwatch:*",
       "logs:*",
       "apigateway:*",
       "iam:*",
