@@ -9,7 +9,7 @@ def lambda_handler(event, context):
     if method == "POST" and path == "/dev/auth/signup":
         return signup(event)
 
-    elif method == "POST" and path == "/dev/auth/signup":
+    elif method == "POST" and path == "/dev/auth/login":
         return login(event)
 
     return {
