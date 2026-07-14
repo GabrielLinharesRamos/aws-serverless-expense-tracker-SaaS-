@@ -16,7 +16,7 @@ def lambda_handler(event, context):
     elif method == "PUT":
         return update_expense(event)
 
-    elif method == "DELETE":
+    elif method == "DELETE": 
         return exclude_expense(event)
 
     return {
