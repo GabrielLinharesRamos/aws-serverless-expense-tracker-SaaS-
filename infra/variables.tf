@@ -15,7 +15,7 @@ variable "github_allowed_repo_and_branch" {
   type        = string
 
   # caso queira testar em um fork altere aqui 
-  default = "repo:GabrielLinharesRamos/aws-serverless-expense-tracker-saas-:ref:refs/heads/main"
+  default = "repo:GabrielLinharesRamos/aws-serverless-expense-tracker-SaaS-:ref:refs/heads/main"
 }
 
 #api_gateway
