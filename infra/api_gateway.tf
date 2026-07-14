@@ -81,6 +81,13 @@ resource "aws_apigatewayv2_route" "saas_project_api_routes_post_signup" {
   target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_auth.id}"
 }
 
+resource "aws_apigatewayv2_route" "saas_project_api_routes_post_login" {
+  api_id    = aws_apigatewayv2_api.saas_project_api_gateway.id
+  route_key = "POST /auth/login"
+
+  target = "integrations/${aws_apigatewayv2_integration.saas_project_api_integration_auth.id}"
+}
+
 # Criação do stage
 resource "aws_apigatewayv2_stage" "saas_project_api_stage" {
   api_id      = aws_apigatewayv2_api.saas_project_api_gateway.id
